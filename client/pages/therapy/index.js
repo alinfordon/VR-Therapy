@@ -16,13 +16,6 @@ const TherapyIndex = () => {
   const [counter, setCounter] = useState(60);
 
 
- 
-    if(isGraph){      
-      setTimeout(function() {
-        setOk(true);
-      }, 2000);
-    }
-    
   
   
 
