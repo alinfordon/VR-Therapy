@@ -1,16 +1,20 @@
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { SyncOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import { Context } from "../context";
 import { useRouter } from "next/router";
 import user from "../../server/models/user";
+import TopNav from "../components/TopNav";
+import { Layout } from "antd";
+import { SyncOutlined } from "@ant-design/icons";
+
+const { Content, Footer, Header, Sider } = Layout;
 
 const Register = () => {
-  const [name, setName] = useState("Ryan");
-  const [email, setEmail] = useState("ryan@gmail.com");
-  const [password, setPassword] = useState("rrrrrr");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
   const {
@@ -34,7 +38,7 @@ const Register = () => {
         password,
       });
       // console.log("REGISTER RESPONSE", data);
-      toast("Registration successful. Please login.");
+      toast("Inregistrare reusita. Rugam autetificare.");
       setName("");
       setEmail("");
       setPassword("");
@@ -46,9 +50,12 @@ const Register = () => {
   };
 
   return (
-    <>
-      <h1 className="jumbotron text-center bg-primary square">Register</h1>
-
+    <Layout style={{ minHeight: '100vh' }}> 
+      <Header style={{ padding: 0}}>
+        <TopNav />
+      </Header>
+      <h1 className="jumbotron text-center bg-primary square">Inregistrare</h1>
+      <Content>
       <div className="container col-md-4 offset-md-4 pb-5">
         <form onSubmit={handleSubmit}>
           <input
@@ -56,7 +63,7 @@ const Register = () => {
             className="form-control mb-4 p-4"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            placeholder="Enter name"
+            placeholder="Introdu nume"
             required
           />
 
@@ -65,7 +72,7 @@ const Register = () => {
             className="form-control mb-4 p-4"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="Enter email"
+            placeholder="Introdu email"
             required
           />
 
@@ -74,7 +81,7 @@ const Register = () => {
             className="form-control mb-4 p-4"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="Enter password"
+            placeholder="Introdu parola"
             required
           />
 
@@ -83,18 +90,20 @@ const Register = () => {
             className="btn btn-block btn-primary"
             disabled={!name || !email || !password || loading}
           >
-            {loading ? <SyncOutlined spin /> : "Submit"}
+            {loading ? <SyncOutlined spin /> : "Trimite"}
           </button>
         </form>
 
         <p className="text-center p-3">
-          Already registered?{" "}
+          Sunteti deja inregistrat?{" "}
           <Link href="/login">
-            <a>Login</a>
+            <a>Autentificare</a>
           </Link>
         </p>
       </div>
-    </>
+      </Content>
+      <Footer style={{ textAlign: 'center' }}>--© {(new Date().getFullYear())} Make IT Oradea, All Rights Reserved</Footer>
+    </Layout>
   );
 };
 

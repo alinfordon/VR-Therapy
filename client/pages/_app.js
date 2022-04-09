@@ -9,8 +9,7 @@ import { Provider } from "../context";
 function MyApp({ Component, pageProps }) {
   return (
     <Provider>
-      <ToastContainer position="top-center" />
-      <TopNav />
+      <ToastContainer position="top-center" />      
       <Component {...pageProps} />
     </Provider>
   );

@@ -38,63 +38,33 @@ const TopNav = () => {
   };
 
   return (
-    <Menu mode="horizontal" selectedKeys={[current]}>
+    <Menu mode="horizontal" theme="dark" selectedKeys={[current]}>
       <Item
         key="/"
         onClick={(e) => setCurrent(e.key)}
         icon={<AppstoreOutlined />}
       >
         <Link href="/">
-          <a>App</a>
+          <a>VR Therapy</a>
         </Link>
       </Item>
 
-      {user && user.role && user.role.includes("Instructor") ? (
-        <Item
-          key="/instructor/course/create"
-          onClick={(e) => setCurrent(e.key)}
-          icon={<CarryOutOutlined />}
-        >
-          <Link href="/instructor/course/create">
-            <a>Create Course</a>
-          </Link>
-        </Item>
-      ) : (
-        <Item
-          key="/user/become-instructor"
-          onClick={(e) => setCurrent(e.key)}
-          icon={<TeamOutlined />}
-        >
-          <Link href="/user/become-instructor">
-            <a>Become Instructor</a>
-          </Link>
-        </Item>
-      )}
-
+    
       {user === null && (
         <>
           <Item
             key="/login"
             onClick={(e) => setCurrent(e.key)}
             icon={<LoginOutlined />}
+            className="float-right"
           >
             <Link href="/login">
               <a>Login</a>
             </Link>
           </Item>
-
-          <Item
-            key="/register"
-            onClick={(e) => setCurrent(e.key)}
-            icon={<UserAddOutlined />}
-          >
-            <Link href="/register">
-              <a>Register</a>
-            </Link>
-          </Item>
         </>
       )}
-
+      
       {user !== null && (
         <SubMenu
           icon={<CoffeeOutlined />}

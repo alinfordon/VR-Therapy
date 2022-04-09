@@ -1,14 +1,18 @@
 import { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { SyncOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import { Context } from "../context";
 import { useRouter } from "next/router";
+import TopNav from "../components/TopNav";
+import { Layout, Menu } from "antd";
+import { SyncOutlined, EditOutlined, PieChartOutlined, DollarOutlined } from "@ant-design/icons";
+
+const { Content, Footer, Header, Sider } = Layout;
 
 const Login = () => {
-  const [email, setEmail] = useState("ryan@gmail.com");
-  const [password, setPassword] = useState("rrrrrr");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
   // state
@@ -51,9 +55,12 @@ const Login = () => {
   };
 
   return (
-    <>
-      <h1 className="jumbotron text-center bg-primary square">Login</h1>
-
+    <Layout style={{ minHeight: '100vh' }}> 
+    <Header style={{ padding: 0}}>
+        <TopNav />
+      </Header>
+      <h1 className="jumbotron text-center bg-primary square">Autentificare</h1>
+      <Content style={{ padding: '0 50px'}}>  
       <div className="container col-md-4 offset-md-4 pb-5">
         <form onSubmit={handleSubmit}>
           <input
@@ -61,7 +68,7 @@ const Login = () => {
             className="form-control mb-4 p-4"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="Enter email"
+            placeholder="Introdu email"
             required
           />
 
@@ -70,7 +77,7 @@ const Login = () => {
             className="form-control mb-4 p-4"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="Enter password"
+            placeholder="Introdu parola"
             required
           />
 
@@ -84,19 +91,21 @@ const Login = () => {
         </form>
 
         <p className="text-center pt-3">
-          Not yet registered?{" "}
+          Nu sunteti inregistrat?{" "}
           <Link href="/register">
-            <a>Register</a>
+            <a>Inregistrare</a>
           </Link>
         </p>
 
         <p className="text-center">
           <Link href="/forgot-password">
-            <a className="text-danger">Forgot password</a>
+            <a className="text-danger">Am uitat parola</a>
           </Link>
         </p>
       </div>
-    </>
+      </Content>
+      <Footer style={{ textAlign: 'center' }}>--© {(new Date().getFullYear())} Make IT Oradea, All Rights Reserved</Footer>
+    </Layout>
   );
 };
 

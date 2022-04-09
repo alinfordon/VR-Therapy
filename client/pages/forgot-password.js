@@ -4,7 +4,11 @@ import { toast } from "react-toastify";
 import { SyncOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import { Context } from "../context";
+import TopNav from "../components/TopNav";
 import { useRouter } from "next/router";
+import { Layout } from "antd";
+
+const { Content, Footer, Header, Sider } = Layout;
 
 const ForgotPassword = () => {
   // state
@@ -32,7 +36,7 @@ const ForgotPassword = () => {
     try {
       const { data } = await axios.post("/api/forgot-password", { email });
       setSuccess(true);
-      toast("Check your email for the secret code");
+      toast("Verifica email pentru codul secret");
       setLoading(false);
     } catch (err) {
       setLoading(false);
@@ -55,7 +59,7 @@ const ForgotPassword = () => {
       setCode("");
       setNewPassword("");
       setLoading(false);
-      toast("Great! Now you can login with your new password");
+      toast("Felicitari! Acum va puteti autentifica cu noua parola");
     } catch (err) {
       setLoading(false);
       toast(err.response.data);
@@ -63,11 +67,14 @@ const ForgotPassword = () => {
   };
 
   return (
-    <>
+    <Layout style={{ minHeight: '100vh' }}> 
+      <Header style={{ padding: 0}}>
+        <TopNav />
+      </Header>
       <h1 className="jumbotron text-center bg-primary square">
-        Forgot Password
+        Recuperare Parola
       </h1>
-
+      <Content>
       <div className="container col-md-4 offset-md-4 pb-5">
         <form onSubmit={success ? handleResetPassword : handleSubmit}>
           <input
@@ -75,7 +82,7 @@ const ForgotPassword = () => {
             className="form-control mb-4 p-4"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="Enter email"
+            placeholder="Introdu email"
             required
           />
           {success && (
@@ -85,7 +92,7 @@ const ForgotPassword = () => {
                 className="form-control mb-4 p-4"
                 value={code}
                 onChange={(e) => setCode(e.target.value)}
-                placeholder="Enter secret code"
+                placeholder="Introdu codul secret"
                 required
               />
 
@@ -94,7 +101,7 @@ const ForgotPassword = () => {
                 className="form-control mb-4 p-4"
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
-                placeholder="New Password"
+                placeholder="Parola noua"
                 required
               />
             </>
@@ -105,11 +112,13 @@ const ForgotPassword = () => {
             className="btn btn-primary btn-block p-2"
             disabled={loading || !email}
           >
-            {loading ? <SyncOutlined spin /> : "Submit"}
+            {loading ? <SyncOutlined spin /> : "Trimite"}
           </button>
         </form>
       </div>
-    </>
+      </Content>
+      <Footer style={{ textAlign: 'center' }}>--© {(new Date().getFullYear())} Make IT Oradea, All Rights Reserved</Footer>
+    </Layout>
   );
 };
 
