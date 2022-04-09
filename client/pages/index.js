@@ -11,10 +11,13 @@ const Index = () => {
         <TopNav />
       </Header>
       <h1 className="jumbotron text-center bg-primary square">
-        VR Therapy
+        Fearfree
       </h1>
       <Content>
-      <p>from next js...</p>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+          <img src="/img/bg1.png" ></img>
+        </div>
+      
       </Content>
       <Footer style={{ textAlign: 'center' }}>--© {(new Date().getFullYear())} Make IT Oradea, All Rights Reserved</Footer>
     </Layout>

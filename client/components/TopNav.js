@@ -45,7 +45,7 @@ const TopNav = () => {
         icon={<AppstoreOutlined />}
       >
         <Link href="/">
-          <a>VR Therapy</a>
+          <a>Fearfree</a>
         </Link>
       </Item>
 
